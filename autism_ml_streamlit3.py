@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import streamlit as st
+from PIL import Image
 
 # Load the saved model and output label encoder
 with open('random_forest_autism3.pickle', 'rb') as f:
@@ -53,31 +55,34 @@ def calculate_score(input_data):
 
 
 # Define the Streamlit app
-st.title('Simplified Autism Screening Tool')
-st.write("This app uses 8 inputs to predict the autism traits using a "
-" machine learning model built on the Quantitative Checklist for Autism in Toddlers (Q-CHAT10) dataset."
-"The app is using the most important and effective features from the QCHAT10"
-"using the Random Forest feature importance with Recursive Feature Elimination method."
-"The goal is to provide a more  efficient and simplified alternative to traditional autism  screening and to support early decision making with reliable"
-"and accurate results.")
+st.markdown("<h1 style='text-align: left;'>Simplified Autism Screening Tool</h1>", unsafe_allow_html=True)
 
-st.write('Enter the following information:')
+# Define the Streamlit app
+#st.markdown("<h1 style='text-align: center;'><img src='https://www.autodraw.com/share/MN950HTXOZ9S' width='50' height='50' style='vertical-align: middle;'> Simplified Autism Screening Tool</h1>", unsafe_allow_html=True)
+
+st.write("<div style='text-align: justify;'>This app uses 8 inputs to predict the autism traits using a machine learning model"
+          " built on the Quantitative Checklist for Autism in Toddlers (Q-CHAT10) dataset. The app is using the most important and "
+          " effective features from the QCHAT10 using the Random Forest feature importance with Recursive Feature Elimination method." 
+          " The goal is to provide a more  efficient and simplified alternative to traditional autism screening and to support early"
+          " decision making with reliable and accurate results.</div>", unsafe_allow_html=True)
+
+st.subheader('Use the form below to get started')
 
 # Collect input from user
 # Get user input
-Name = st.text_input("Name :")
-Age_Mons = st.text_input("Age : **_format use in month_**.")
-Sex = st.selectbox("Gender", ("Female", "Male"))
-A1 = st.selectbox("1.Does your child look at you when you call his/her name?", ("Always", "Usually","Sometimes","Rarely","Never"))
-A2 = st.selectbox("2.How easy is it for you to get eye contact with your child?", ("Very Easy", "Quite Easy", "Quite Difficult", "Very Difficult","Impossible"))
+Name = st.text_input("**Name**")
+Age_Mons = st.text_input("**Age**")
+Sex = st.selectbox("**Gender**", ("Female", "Male"))
+A1 = st.selectbox("**1.Does your child look at you when you call his/her name?**", ("Always", "Usually","Sometimes","Rarely","Never"))
+A2 = st.selectbox("**2.How easy is it for you to get eye contact with your child?**", ("Very Easy", "Quite Easy", "Quite Difficult", "Very Difficult","Impossible"))
 #A3 = st.selectbox("Does your child point to indicate that he/she wants something?", ("Yes", "No"))
-A4 = st.selectbox("3.Does your child point to share interest with you? e.g pointing at an interesting sights", ("Many times a day", "A few times a day", "A few times a week", "Less than once a week", "Never" ))
-A5 = st.selectbox("4.Does your child pretend? e.g care for dolls, talk on the toy phone", ("Many times a day", "A few times a day", "A few times a week", "Less than once a week", "Never" ))
-A6 = st.selectbox("5.Does your child follow where you're looking?", ("Many times a day", "A few times a day", "A few times a week", "Less than once a week", "Never" ))
-A7 = st.selectbox("6.If you or someone else in the family is visibly upset, does your child show signs of wanting to comfort them? eg stroking hair, hugging them",
+A4 = st.selectbox("**3.Does your child point to share interest with you?** ***e.g pointing at an interesting sights***", ("Many times a day", "A few times a day", "A few times a week", "Less than once a week", "Never" ))
+A5 = st.selectbox("**4.Does your child pretend?** ***e.g care for dolls, talk on the toy phone***", ("Many times a day", "A few times a day", "A few times a week", "Less than once a week", "Never" ))
+A6 = st.selectbox("**5.Does your child follow where you're looking?**", ("Many times a day", "A few times a day", "A few times a week", "Less than once a week", "Never" ))
+A7 = st.selectbox("**6.If you or someone else in the family is visibly upset, does your child show signs of wanting to comfort them?** ***e.g stroking hair, hugging them***",
                    ("Always", "Usually","Sometimes","Rarely","Never"))
-A8 = st.selectbox("7.Would you desribe your child's first word as:", ("Very typical", "Quite typical","Slightly unusual","Very unusual","My child does not speak"))
-A9 = st.selectbox("8.Does your child use simple gestures? e.g wave goodbye", ("Many times a day", "A few times a day", "A few times a week", "Less than once a week", "Never" ))
+A8 = st.selectbox("**7.Would you desribe your child's first word as:**", ("Very typical", "Quite typical","Slightly unusual","Very unusual","My child does not speak"))
+A9 = st.selectbox("**8.Does your child use simple gestures? e.g wave goodbye**", ("Many times a day", "A few times a day", "A few times a week", "Less than once a week", "Never" ))
 #A10 = st.selectbox("Does your child stare at nothing with no apparent purpose?", ("Many times a day", "A few times a day", "A few times a week", "Less than once a week", "Never" ))
 
 # Create a dataframe from the input data
